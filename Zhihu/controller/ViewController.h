@@ -1,8 +1,8 @@
 //
 //  ViewController.h
-//  Zhihu
+//  ZhihuApp
 //
-//  Created by SASE on 6/18/16.
+//  Created by SASE on 5/31/16.
 //  Copyright © 2016 SASE. All rights reserved.
 //
 
@@ -10,6 +10,7 @@
 
 @interface ViewController : UIViewController
 
+@property (nonatomic) NSString *storyContentURLString;
 
 @end
 
