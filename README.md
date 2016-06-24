@@ -1,11 +1,6 @@
 # Zhihu
 
-##16-6-24
 
-####I think I should use `UIPageViewController` instead of `UINavigationController`
-
-
-##16-6-24
 ###This demo is an imitation of the exist APP 知乎日报,and it is just used to test my ability.I will never use it in business way.
 
 ###So it should have such functions:
