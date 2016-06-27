@@ -12,7 +12,6 @@
 
 @interface TableHeadView ()
 
-@property (weak, nonatomic) IBOutlet UIButton *navigationButton;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
 @property (nonatomic) UIScrollView *scrollView;
@@ -26,16 +25,6 @@
 
 @implementation TableHeadView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
-
-
-///initialize  how
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
@@ -98,6 +87,7 @@
                    //
                    [self loadScrollViewWithPage:0];
                    [self loadScrollViewWithPage:1];
+                   [self loadScrollViewWithPage:2];
 
                }];
         
@@ -121,17 +111,16 @@
     Article *article = _topStories[page];
 
     //image
-    if ((NSNull *)imageView == [NSNull null])
-    {
+    if ((NSNull *)imageView == [NSNull null]) {
         
         imageView = [[UIImageView alloc]initWithImage:article.articleLargeImage];
+        
         [_storyImageViews replaceObjectAtIndex:page withObject:imageView];
         
     }
     
     //title
-    if ((NSNull *)label == [NSNull null])
-    {
+    if ((NSNull *)label == [NSNull null]) {
         
         label = [[UILabel alloc]init];
         
@@ -144,8 +133,7 @@
     }
 
 
-    if (imageView.superview == nil)
-    {
+    if (imageView.superview == nil) {
         CGRect frame = [TableHeadView getHeaderViewFrame];
 
         frame.origin.x = CGRectGetWidth(frame) * page;
@@ -156,17 +144,18 @@
         
     }
     
-    if (label.superview == nil)
-    {
+    if (label.superview == nil) {
         CGRect frame = [TableHeadView getHeaderViewFrame];
         
         frame.origin.x = CGRectGetWidth(frame) * page + 10;
         frame.size.width -= 10;
-        frame.origin.y = 40;
+        frame.origin.y = frame.size.height/3.5;
+        
+        NSLog(@"frame.size.height,%f",frame.size.height*3/4);
         //frame.size.height = 40;
         label.frame = frame;
         
-        UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18];
+        UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
         NSDictionary *attrsDictionary =
         [NSDictionary dictionaryWithObject:font
                                     forKey:NSFontAttributeName];
@@ -174,13 +163,14 @@
         [[NSAttributedString alloc] initWithString:article.articleTitle
                                         attributes:attrsDictionary];
         label.attributedText = attrString;
-        
+        label.shadowColor = [UIColor blackColor];
+        label.shadowOffset = CGSizeMake(0, -0.5);
+        //label.tintColor = [UIColor whiteColor];
         [_scrollView addSubview:label];
 
     }
 
 }
-
 
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
@@ -197,6 +187,7 @@
     [self loadScrollViewWithPage:page - 1];
     [self loadScrollViewWithPage:page];
     [self loadScrollViewWithPage:page + 1];
+    [self loadScrollViewWithPage:page + 2];
 
 }
 
@@ -206,13 +197,6 @@
     
     NSLog(@"pageControlAction");
     
-}
-
-- (IBAction)navigationButtonAction:(UIButton *)sender
-{
-    
-    NSLog(@"navigationButtonAction");
-
 }
 
 //constraints
