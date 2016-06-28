@@ -10,10 +10,10 @@
 		58890F601D151608004C3A78 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58890F5F1D151608004C3A78 /* main.m */; };
 		58890F631D151608004C3A78 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58890F621D151608004C3A78 /* AppDelegate.m */; };
 		58890F6B1D151608004C3A78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58890F6A1D151608004C3A78 /* Assets.xcassets */; };
+		58A297151D224F2B00FD8DD8 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A297141D224F2B00FD8DD8 /* NavigationController.m */; };
 		58AD2C711D1C401500DA8360 /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AD2C6E1D1C401500DA8360 /* MyTableViewController.m */; };
 		58AD2C721D1C401500DA8360 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AD2C701D1C401500DA8360 /* ViewController.m */; };
 		58AD2C751D1C402300DA8360 /* ZHJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AD2C741D1C402300DA8360 /* ZHJsonParser.m */; };
-		58AD2C7C1D1C403200DA8360 /* HeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58AD2C761D1C403200DA8360 /* HeadView.xib */; };
 		58AD2C7D1D1C403200DA8360 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58AD2C771D1C403200DA8360 /* Main.storyboard */; };
 		58AD2C7E1D1C403200DA8360 /* MyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AD2C791D1C403200DA8360 /* MyTableViewCell.m */; };
 		58AD2C7F1D1C403200DA8360 /* TableHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AD2C7B1D1C403200DA8360 /* TableHeadView.m */; };
@@ -28,13 +28,14 @@
 		58890F621D151608004C3A78 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		58890F6A1D151608004C3A78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		58890F931D1594B9004C3A78 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		58A297131D224F2B00FD8DD8 /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NavigationController.h; path = controller/NavigationController.h; sourceTree = "<group>"; };
+		58A297141D224F2B00FD8DD8 /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NavigationController.m; path = controller/NavigationController.m; sourceTree = "<group>"; };
 		58AD2C6D1D1C401500DA8360 /* MyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyTableViewController.h; path = controller/MyTableViewController.h; sourceTree = "<group>"; };
 		58AD2C6E1D1C401500DA8360 /* MyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyTableViewController.m; path = controller/MyTableViewController.m; sourceTree = "<group>"; };
 		58AD2C6F1D1C401500DA8360 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = controller/ViewController.h; sourceTree = "<group>"; };
 		58AD2C701D1C401500DA8360 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = controller/ViewController.m; sourceTree = "<group>"; };
 		58AD2C731D1C402300DA8360 /* ZHJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZHJsonParser.h; path = data/ZHJsonParser.h; sourceTree = "<group>"; };
 		58AD2C741D1C402300DA8360 /* ZHJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZHJsonParser.m; path = data/ZHJsonParser.m; sourceTree = "<group>"; };
-		58AD2C761D1C403200DA8360 /* HeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HeadView.xib; path = interface/HeadView.xib; sourceTree = "<group>"; };
 		58AD2C771D1C403200DA8360 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = interface/Main.storyboard; sourceTree = "<group>"; };
 		58AD2C781D1C403200DA8360 /* MyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyTableViewCell.h; path = interface/MyTableViewCell.h; sourceTree = "<group>"; };
 		58AD2C791D1C403200DA8360 /* MyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyTableViewCell.m; path = interface/MyTableViewCell.m; sourceTree = "<group>"; };
@@ -120,6 +121,8 @@
 		58890F8D1D1521DA004C3A78 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				58A297131D224F2B00FD8DD8 /* NavigationController.h */,
+				58A297141D224F2B00FD8DD8 /* NavigationController.m */,
 				58AD2C6D1D1C401500DA8360 /* MyTableViewController.h */,
 				58AD2C6E1D1C401500DA8360 /* MyTableViewController.m */,
 				58AD2C6F1D1C401500DA8360 /* ViewController.h */,
@@ -131,7 +134,6 @@
 		58890F901D152559004C3A78 /* interface */ = {
 			isa = PBXGroup;
 			children = (
-				58AD2C761D1C403200DA8360 /* HeadView.xib */,
 				58AD2C771D1C403200DA8360 /* Main.storyboard */,
 				58AD2C781D1C403200DA8360 /* MyTableViewCell.h */,
 				58AD2C791D1C403200DA8360 /* MyTableViewCell.m */,
@@ -200,7 +202,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				58AD2C7D1D1C403200DA8360 /* Main.storyboard in Resources */,
-				58AD2C7C1D1C403200DA8360 /* HeadView.xib in Resources */,
 				58890F6B1D151608004C3A78 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -219,6 +220,7 @@
 				58AD2C7F1D1C403200DA8360 /* TableHeadView.m in Sources */,
 				58AD2C721D1C401500DA8360 /* ViewController.m in Sources */,
 				58AD2C7E1D1C403200DA8360 /* MyTableViewCell.m in Sources */,
+				58A297151D224F2B00FD8DD8 /* NavigationController.m in Sources */,
 				58AD2C751D1C402300DA8360 /* ZHJsonParser.m in Sources */,
 				58890F601D151608004C3A78 /* main.m in Sources */,
 			);

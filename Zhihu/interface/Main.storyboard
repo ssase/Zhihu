@@ -73,7 +73,7 @@
         <!--Navigation Controller-->
         <scene sceneID="zM0-lE-IP2">
             <objects>
-                <navigationController definesPresentationContext="YES" id="cWH-Xb-ZN2" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="cWH-Xb-ZN2" customClass="NavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yG7-lj-uFi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

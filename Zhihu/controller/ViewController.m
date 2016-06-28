@@ -37,20 +37,17 @@
                    self.HTMLString = [notification.userInfo valueForKey:ZHJsonParser.parseNewsContents];
                }];
 
-   // _navigationItem = nil;
     
+    //let navigation bar transparent and table header view on the top
     self.automaticallyAdjustsScrollViewInsets = false;
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     
     //hide the back button
     self.navigationItem.hidesBackButton = YES;
-
-    //self.navigationController.navigationBar.backItem
-    //remove the back item
-//    [self.navigationItem setImage:[UIImage imageNamed:@"LeftButton_back_Icon"] forState:UIControlStateNormal];
-//    [leftButton setTitle:@"返回" forState:UIControlStateNormal];
+    
 }
+
 
 - (void)viewDidAppear:(BOOL)animated {
     

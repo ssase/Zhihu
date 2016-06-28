@@ -10,6 +10,4 @@
 
 @interface MyTableViewController : UITableViewController
 
-@property (nonatomic, weak) IBOutlet UIView *referencedView;
-
 @end

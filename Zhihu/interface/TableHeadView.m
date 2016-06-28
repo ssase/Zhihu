@@ -6,13 +6,15 @@
 //  Copyright © 2016 SASE. All rights reserved.
 //
 
+#define TableHeaderViewOriginY -20
+
 #import "TableHeadView.h"
 #import "ZHJsonParser.h"
 #import "Article.h"
 
 @interface TableHeadView ()
 
-@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
+@property (nonatomic) UIPageControl *pageControl;
 
 @property (nonatomic) UIScrollView *scrollView;
 
@@ -26,17 +28,20 @@
 @implementation TableHeadView
 
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)init
 {
-    self = [super initWithCoder:aDecoder];
+    self = [super init];
     
     if (self) {
         
         //initialize the header view
+        CGRect Vrect = [TableHeadView getHeaderViewFrame];
+        Vrect.origin.y = TableHeaderViewOriginY;
+        self.frame = Vrect;
+
         CGRect rect = [TableHeadView getHeaderViewFrame];
         _scrollView = [[UIScrollView alloc]initWithFrame:rect];
-        
-        self.frame = rect;
+        _pageControl = [[UIPageControl alloc]init];
         
         self.scrollView.pagingEnabled = YES;
         self.scrollView.showsHorizontalScrollIndicator = NO;
@@ -44,6 +49,11 @@
         //self.scrollView.scrollsToTop = NO;
         self.scrollView.delegate = self;
         self.scrollView.contentSize =rect.size;
+        
+        [self addSubview:_pageControl];
+        NSString *horizontalDistance = [NSString stringWithFormat:@"H:|-%f-[subview]-%f-|",CGRectGetWidth(rect)/3,CGRectGetWidth(rect)/3];
+        NSString *verticalDistance = [NSString stringWithFormat:@"V:[subview(40)]|"];
+        [self constrainSubview:_pageControl toMatchWithSuperview:self WithHorizontalFormatString:horizontalDistance verticalFormatString:verticalDistance];
         
         //[self insertSubview:_scrollView belowSubview:_topLabel];
         [self addSubview:_scrollView];
@@ -151,7 +161,6 @@
         frame.size.width -= 10;
         frame.origin.y = frame.size.height/3.5;
         
-        NSLog(@"frame.size.height,%f",frame.size.height*3/4);
         //frame.size.height = 40;
         label.frame = frame;
         
@@ -206,20 +215,14 @@
     subview.translatesAutoresizingMaskIntoConstraints = NO;
     
     NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(subview);
-    
-    NSString *horizontalDistance;
-    NSString *verticalDistance;
-    
-    horizontalDistance = HString;
-    verticalDistance = VString;
-    
+        
     NSArray *horizontalConstraints = [NSLayoutConstraint
-                                      constraintsWithVisualFormat:horizontalDistance
+                                      constraintsWithVisualFormat:HString
                                       options:0
                                       metrics:nil
                                       views:viewsDictionary];
     NSArray *verticalConstraints = [NSLayoutConstraint
-                                    constraintsWithVisualFormat:verticalDistance
+                                    constraintsWithVisualFormat:VString
                                     options:0
                                     metrics:nil
                                     views:viewsDictionary];

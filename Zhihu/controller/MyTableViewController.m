@@ -42,24 +42,7 @@ static NSString *lastestNewsListURLString = @"http://news-at.zhihu.com/api/4/new
                 }];
     
     //headerView...
-
-   // [self.navigationController setNavigationBarHidden:YES];
-    //[self.navigationController setStatus
-    
-//    CGRect rect = [TableHeadView getHeaderViewFrame];
-//    NSLog(@"mainScreen height%frect.origin.y%f",rect.size.height,rect.origin.y);
-//    
-//    CGRect ff = [UIScreen mainScreen].bounds;
-//    ff.size.height = 130;
-//    UIImageView *ima = [[UIImageView alloc]initWithFrame:ff];
-//    
-//    ima.image = [UIImage imageNamed:@"az"];
-//    self.tableView.tableHeaderView = ima;
-
-    
-    
-    [[NSBundle mainBundle] loadNibNamed:@"HeadView" owner:self options:nil];
-    self.tableView.tableHeaderView =_referencedView;
+    self.tableView.tableHeaderView =[[TableHeadView alloc]init];
     NSLog(@"viewDidLoad");
     
     //start dowmloading data
@@ -84,7 +67,6 @@ static NSString *lastestNewsListURLString = @"http://news-at.zhihu.com/api/4/new
 //                                forKey:NSFontAttributeName];
 //    [[UIBarButtonItem appearance] setTitleTextAttributes:attrsDictionary forState:UIControlStateNormal];
 
-    //self.navigationItem.title
 }
 
 - (void)setStories:(NSMutableArray *)stories
