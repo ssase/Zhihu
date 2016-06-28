@@ -10,7 +10,8 @@
 #import <UIKit/UIKit.h>
 
 
-@interface TableHeadView : UIView <UIScrollViewDelegate>
+@interface TableHeadView : UIView <UIScrollViewDelegate> 
 
++ (CGRect)getHeaderViewFrame;
 
 @end

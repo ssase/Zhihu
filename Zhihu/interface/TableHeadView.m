@@ -6,14 +6,15 @@
 //  Copyright © 2016 SASE. All rights reserved.
 //
 
+#define TableHeaderViewOriginY -20
+
 #import "TableHeadView.h"
 #import "ZHJsonParser.h"
 #import "Article.h"
 
 @interface TableHeadView ()
 
-@property (weak, nonatomic) IBOutlet UIButton *navigationButton;
-@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
+@property (nonatomic) UIPageControl *pageControl;
 
 @property (nonatomic) UIScrollView *scrollView;
 
@@ -26,28 +27,21 @@
 
 @implementation TableHeadView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
-
-///initialize  how
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)init
 {
-    self = [super initWithCoder:aDecoder];
+    self = [super init];
     
     if (self) {
         
         //initialize the header view
+        CGRect Vrect = [TableHeadView getHeaderViewFrame];
+        Vrect.origin.y = TableHeaderViewOriginY;
+        self.frame = Vrect;
+
         CGRect rect = [TableHeadView getHeaderViewFrame];
         _scrollView = [[UIScrollView alloc]initWithFrame:rect];
-        
-        self.frame = rect;
+        _pageControl = [[UIPageControl alloc]init];
         
         self.scrollView.pagingEnabled = YES;
         self.scrollView.showsHorizontalScrollIndicator = NO;
@@ -55,6 +49,11 @@
         //self.scrollView.scrollsToTop = NO;
         self.scrollView.delegate = self;
         self.scrollView.contentSize =rect.size;
+        
+        [self addSubview:_pageControl];
+        NSString *horizontalDistance = [NSString stringWithFormat:@"H:|-%f-[subview]-%f-|",CGRectGetWidth(rect)/3,CGRectGetWidth(rect)/3];
+        NSString *verticalDistance = [NSString stringWithFormat:@"V:[subview(40)]|"];
+        [self constrainSubview:_pageControl toMatchWithSuperview:self WithHorizontalFormatString:horizontalDistance verticalFormatString:verticalDistance];
         
         //[self insertSubview:_scrollView belowSubview:_topLabel];
         [self addSubview:_scrollView];
@@ -98,6 +97,7 @@
                    //
                    [self loadScrollViewWithPage:0];
                    [self loadScrollViewWithPage:1];
+                   [self loadScrollViewWithPage:2];
 
                }];
         
@@ -121,17 +121,16 @@
     Article *article = _topStories[page];
 
     //image
-    if ((NSNull *)imageView == [NSNull null])
-    {
+    if ((NSNull *)imageView == [NSNull null]) {
         
         imageView = [[UIImageView alloc]initWithImage:article.articleLargeImage];
+        
         [_storyImageViews replaceObjectAtIndex:page withObject:imageView];
         
     }
     
     //title
-    if ((NSNull *)label == [NSNull null])
-    {
+    if ((NSNull *)label == [NSNull null]) {
         
         label = [[UILabel alloc]init];
         
@@ -144,8 +143,7 @@
     }
 
 
-    if (imageView.superview == nil)
-    {
+    if (imageView.superview == nil) {
         CGRect frame = [TableHeadView getHeaderViewFrame];
 
         frame.origin.x = CGRectGetWidth(frame) * page;
@@ -156,17 +154,17 @@
         
     }
     
-    if (label.superview == nil)
-    {
+    if (label.superview == nil) {
         CGRect frame = [TableHeadView getHeaderViewFrame];
         
         frame.origin.x = CGRectGetWidth(frame) * page + 10;
         frame.size.width -= 10;
-        frame.origin.y = 40;
+        frame.origin.y = frame.size.height/3.5;
+        
         //frame.size.height = 40;
         label.frame = frame;
         
-        UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18];
+        UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
         NSDictionary *attrsDictionary =
         [NSDictionary dictionaryWithObject:font
                                     forKey:NSFontAttributeName];
@@ -174,13 +172,14 @@
         [[NSAttributedString alloc] initWithString:article.articleTitle
                                         attributes:attrsDictionary];
         label.attributedText = attrString;
-        
+        label.shadowColor = [UIColor blackColor];
+        label.shadowOffset = CGSizeMake(0, -0.5);
+        //label.tintColor = [UIColor whiteColor];
         [_scrollView addSubview:label];
 
     }
 
 }
-
 
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
@@ -197,6 +196,7 @@
     [self loadScrollViewWithPage:page - 1];
     [self loadScrollViewWithPage:page];
     [self loadScrollViewWithPage:page + 1];
+    [self loadScrollViewWithPage:page + 2];
 
 }
 
@@ -208,13 +208,6 @@
     
 }
 
-- (IBAction)navigationButtonAction:(UIButton *)sender
-{
-    
-    NSLog(@"navigationButtonAction");
-
-}
-
 //constraints
 - (void)constrainSubview:(UIView *)subview toMatchWithSuperview:(UIView *)superview WithHorizontalFormatString:(NSString *)HString verticalFormatString:(NSString *)VString
 {
@@ -222,20 +215,14 @@
     subview.translatesAutoresizingMaskIntoConstraints = NO;
     
     NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(subview);
-    
-    NSString *horizontalDistance;
-    NSString *verticalDistance;
-    
-    horizontalDistance = HString;
-    verticalDistance = VString;
-    
+        
     NSArray *horizontalConstraints = [NSLayoutConstraint
-                                      constraintsWithVisualFormat:horizontalDistance
+                                      constraintsWithVisualFormat:HString
                                       options:0
                                       metrics:nil
                                       views:viewsDictionary];
     NSArray *verticalConstraints = [NSLayoutConstraint
-                                    constraintsWithVisualFormat:verticalDistance
+                                    constraintsWithVisualFormat:VString
                                     options:0
                                     metrics:nil
                                     views:viewsDictionary];

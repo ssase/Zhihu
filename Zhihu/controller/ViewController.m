@@ -30,14 +30,24 @@
 //    self.storyContentWebView.frame = frame;
     
     _storyContentObserver = [[NSNotificationCenter defaultCenter]
-                       addObserverForName:ZHJsonParser.parseNewsContents
-                       object:nil
-                       queue:nil
-                       usingBlock:^(NSNotification *notification) {
-                           self.HTMLString = [notification.userInfo valueForKey:ZHJsonParser.parseNewsContents];
-                       }];
+               addObserverForName:ZHJsonParser.parseNewsContents
+               object:nil
+               queue:nil
+               usingBlock:^(NSNotification *notification) {
+                   self.HTMLString = [notification.userInfo valueForKey:ZHJsonParser.parseNewsContents];
+               }];
 
+    
+    //let navigation bar transparent and table header view on the top
+    self.automaticallyAdjustsScrollViewInsets = false;
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    
+    //hide the back button
+    self.navigationItem.hidesBackButton = YES;
+    
 }
+
 
 - (void)viewDidAppear:(BOOL)animated {
     

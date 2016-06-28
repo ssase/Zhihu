@@ -42,21 +42,30 @@ static NSString *lastestNewsListURLString = @"http://news-at.zhihu.com/api/4/new
                 }];
     
     //headerView...
-
-   // [self.navigationController setNavigationBarHidden:YES];
-    //[self.navigationController setStatus
-    
-    CGRect rect = [UIScreen mainScreen].bounds;
-    NSLog(@"mainScreen height%frect.origin.y%f",rect.size.height,rect.origin.y);
-
-
-    
-    [[NSBundle mainBundle] loadNibNamed:@"HeadView" owner:self options:nil];
-    self.tableView.tableHeaderView =_referencedView;
+    self.tableView.tableHeaderView =[[TableHeadView alloc]init];
     NSLog(@"viewDidLoad");
     
     //start dowmloading data
     [ZHJsonParser parseJSONDataWithURLString:lastestNewsListURLString Option:ZHJsonParser.parseNewsList];
+
+    //let navigation bar transparent and table header view on the top
+    self.automaticallyAdjustsScrollViewInsets = false;
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    
+    //initialize a left bar button
+    UIBarButtonItem *naviBarButon = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"≡", @"")
+                              style:UIBarButtonItemStylePlain
+                             target:self
+                             action:@selector(naviBarButonAction:)];
+    naviBarButon.tintColor = [UIColor whiteColor];
+    self.navigationItem.leftBarButtonItem = naviBarButon;
+
+//    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:30];
+//    NSDictionary *attrsDictionary =
+//    [NSDictionary dictionaryWithObject:font
+//                                forKey:NSFontAttributeName];
+//    [[UIBarButtonItem appearance] setTitleTextAttributes:attrsDictionary forState:UIControlStateNormal];
 
 }
 
@@ -74,6 +83,10 @@ static NSString *lastestNewsListURLString = @"http://news-at.zhihu.com/api/4/new
     //[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     NSLog(@"viewDidAppear");
     
+}
+
+- (IBAction)naviBarButonAction:(UIBarButtonItem *)sender {
+    NSLog(@"naviBarButonAction:");
 }
 
 #pragma mark - table view load data
