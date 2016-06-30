@@ -40,8 +40,8 @@
     
     //let navigation bar transparent and table header view on the top
     self.automaticallyAdjustsScrollViewInsets = false;
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    //[self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    //self.navigationController.navigationBar.shadowImage = [UIImage new];
     
     //hide the back button
     self.navigationItem.hidesBackButton = YES;

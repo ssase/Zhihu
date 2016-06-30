@@ -18,8 +18,8 @@ static NSString *lastestNewsListURLString = @"http://news-at.zhihu.com/api/4/new
 @interface MyTableViewController()
 
 @property (nonatomic) NSMutableArray *stories;
-
 @property (nonatomic) id latestNewsObserver;
+@property (nonatomic) UIView *topView;
 
 @end
 
@@ -36,8 +36,6 @@ static NSString *lastestNewsListURLString = @"http://news-at.zhihu.com/api/4/new
                   usingBlock:^(NSNotification *notification) {
 
                       self.stories = [notification.userInfo valueForKey:ZHJsonParser.parseNewsList];
-                      //self.tableView.tableHeaderView = _referencedView;
-                      //NSLog(@"notification--parseNewsList");
 
                 }];
     
@@ -48,11 +46,8 @@ static NSString *lastestNewsListURLString = @"http://news-at.zhihu.com/api/4/new
     //start dowmloading data
     [ZHJsonParser parseJSONDataWithURLString:lastestNewsListURLString Option:ZHJsonParser.parseNewsList];
 
-    //let navigation bar transparent and table header view on the top
     self.automaticallyAdjustsScrollViewInsets = false;
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    
+   
     //initialize a left bar button
     UIBarButtonItem *naviBarButon = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"≡", @"")
                               style:UIBarButtonItemStylePlain
@@ -65,9 +60,28 @@ static NSString *lastestNewsListURLString = @"http://news-at.zhihu.com/api/4/new
 //    NSDictionary *attrsDictionary =
 //    [NSDictionary dictionaryWithObject:font
 //                                forKey:NSFontAttributeName];
-//    [[UIBarButtonItem appearance] setTitleTextAttributes:attrsDictionary forState:UIControlStateNormal];
+    
+    //used to change the status bar's background color
+    CGRect rect = [TableHeadView getHeaderViewFrame];
+    rect.origin.y = -20;
+    rect.size.height = 20;
+    self.topView = [[UIView alloc]initWithFrame:rect];
+    [self.navigationController.navigationBar addSubview:_topView];
+    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    //[self setNeedsStatusBarAppearanceUpdate];
+
+    
+    [self.tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
 
 }
+
+//- (UIStatusBarStyle)preferredStatusBarStyle
+//{
+//    NSLog(@"preferredStatusBarStyle");
+//    return UIStatusBarStyleLightContent;
+//}
+
 
 - (void)setStories:(NSMutableArray *)stories
 {
@@ -87,6 +101,7 @@ static NSString *lastestNewsListURLString = @"http://news-at.zhihu.com/api/4/new
 
 - (IBAction)naviBarButonAction:(UIBarButtonItem *)sender {
     NSLog(@"naviBarButonAction:");
+    
 }
 
 #pragma mark - table view load data
@@ -130,6 +145,36 @@ static NSString *lastestNewsListURLString = @"http://news-at.zhihu.com/api/4/new
         }
     }
     
+    
+}
+
+
+# pragma mark - observer
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    UITableView *tableView = object;
+    if ([keyPath isEqualToString:@"contentOffset"]) {
+        
+        float colorAlpha = tableView.contentOffset.y/[TableHeadView getHeaderViewFrame].size.height;
+        
+        [self changeTopBarBackGroundColorAlpha:colorAlpha];
+            
+    }
+    else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
+
+- (void)changeTopBarBackGroundColorAlpha:(float)colorAlpha
+{
+    UIColor *color = [UIColor colorWithRed:81.0/255.0 green:167.0/255.0 blue:1 alpha:colorAlpha];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self.navigationController.navigationBar setBackgroundColor:color];
+        [_topView setBackgroundColor:color];
+        
+    });
     
 }
 

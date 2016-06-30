@@ -22,6 +22,8 @@
 
 @property (nonatomic,retain) UIView *backgroundView;
 @property (nonatomic,retain) NSMutableArray *screenShotsList;
+// To change the status bar's background color
+@property (nonatomic) UIView *topView;
 
 @property (nonatomic,assign) BOOL isMoving;
 
@@ -29,6 +31,13 @@
 
 
 @implementation NavigationController
+
+//- (UIViewController *)childViewControllerForStatusBarStyle{
+//    NSLog(@"childViewControllerForStatusBarStyle");
+//    return self.topViewController;
+//
+//}
+
 
 - (void)awakeFromNib
 {
@@ -42,19 +51,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    
+    //let navigation bar transparent and table header view on the top
+    self.navigationBar.shadowImage = [UIImage new];
+    [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+
     UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(paningGestureReceive:)];
     
     recognizer.delegate = self;
     [recognizer delaysTouchesBegan];
     [self.view addGestureRecognizer:recognizer];
     
-    
-    
 }
+
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:(BOOL)animated];

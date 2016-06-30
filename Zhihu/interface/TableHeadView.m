@@ -36,7 +36,7 @@
         
         //initialize the header view
         CGRect Vrect = [TableHeadView getHeaderViewFrame];
-        Vrect.origin.y = TableHeaderViewOriginY;
+        //Vrect.origin.y = TableHeaderViewOriginY;
         self.frame = Vrect;
 
         CGRect rect = [TableHeadView getHeaderViewFrame];
@@ -237,9 +237,6 @@
 + (CGRect)getHeaderViewFrame
 {
     CGRect rect = [UIScreen mainScreen].bounds;
-    
-    //rect.origin.y -= 20;
-    
     rect.size.height = rect.size.width/1.7;
     return rect;
 }
