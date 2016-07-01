@@ -5,7 +5,6 @@
 
 ###Now it looks like this:
 ![image](https://github.com/ssase/Zhihu/blob/master/pictures/the%20transition%20top%20bar.png)
-![image](https://github.com/ssase/Zhihu/blob/master/pictures/article.png)
 
 
 ###It should have such functions:
