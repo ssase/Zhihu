@@ -4,12 +4,11 @@
 ###This demo is an imitation of the exist APP 知乎日报,and it is just used to test my ability.I will never use it in business way.
 
 ###Now it looks like this:
-![image](https://github.com/ssase/Zhihu/blob/master/pictures/main.png)
 ![image](https://github.com/ssase/Zhihu/blob/master/pictures/the%20transition%20top%20bar.png)
 ![image](https://github.com/ssase/Zhihu/blob/master/pictures/article.png)
 
 
-###So it should have such functions:
+###It should have such functions:
 
 #####DATA:
 1. downloading data from server 
