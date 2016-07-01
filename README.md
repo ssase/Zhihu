@@ -15,7 +15,7 @@
 
 #####INTERFACE:
 1. a loading view (not done yet)
-2. a main view (is an `UITableView` ,one day a section,today's is completed,but other days' are not)
+2. a main view (is a `UITableView` ,one day a section,today's is completed,but other days' are not)
 3. a comment view (not done yet)
 4. an article view (finished except the bottom bar)
 5. a theme view (not done yet)
